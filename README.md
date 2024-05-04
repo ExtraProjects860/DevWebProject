@@ -24,6 +24,7 @@ Este é um projeto desenvolvido como parte da matéria de Desenvolvimento Web na
 ### Esboços do Projeto
 
 - Tela de Login
+
 ![Tela login](https://github.com/ExtraProjects860/DevWebProject/blob/main/Imagens%20de%20Esbo%C3%A7o%20para%20o%20Site/Imagens%20de%20exemplo/Fotos%20Telas%20Site/Tela%20Login.PNG?raw=true)
 
 ## Como Contribuir
