@@ -43,7 +43,7 @@ Este projeto está sendo desenvolvido pela equipe de Desenvolvimento Web:
 
 - [Alana Karine](https://github.com/AlanaK2)
 - [Davi Nascimento](https://github.com/zedark860)
-- [Gustavo ](https://github.com/Gvcrodrigues99)
+- [Gustavo Rodrigues](https://github.com/Gvcrodrigues99)
 - [Jamil Salomão](https://github.com/jamilsalomao)
 
 ## Licença
