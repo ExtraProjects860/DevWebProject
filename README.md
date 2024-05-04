@@ -1,4 +1,4 @@
-# DevWebProject Sistema de bater ponto online
+# DevWebProject Sistema de relógio de ponto online
 
 Este é um projeto desenvolvido como parte da matéria de Desenvolvimento Web na faculdade. O objetivo é criar um sistema de bater ponto online para uma empresa, utilizando diversas tecnologias e ferramentas para sua implementação.
 
