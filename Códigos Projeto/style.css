@@ -1,0 +1,96 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --cor1: #F0F7F4;
+    --cor2: #fbfbfb;
+    --cor3: #0075A2;
+}
+
+main {
+    width: 100%;
+    background-color: var(--cor1);
+}
+
+.fonte-labels {
+    font-size: 3vw; /* Tamanho inicial da fonte */
+}
+
+/* Define o tamanho mínimo da fonte para dispositivos móveis */
+@media screen and (max-width: 600px) {
+    .fonte-labels {
+        font-size: 16px; /* Tamanho mínimo da fonte para dispositivos móveis */
+    }
+}
+
+/* Define o tamanho máximo da fonte */
+@media screen and (min-width: 1200px) {
+    .fonte-labels {
+        font-size: 36px; /* Tamanho máximo da fonte */
+    }
+}
+
+#corpo-formulario {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    height: 100vh; 
+}
+
+#formulario {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: var(--cor2);
+    padding: 7.5%;
+    height: 25rem;
+    border-radius: 2.5rem;
+    transition: 2s ease;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
+}
+
+.style-inputs{
+    all: unset;
+    background-color: var(--cor1);
+    border-radius:  0.3rem;
+    height: 1.5rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.189);
+    width: 100%; /* Defina a largura como 100% para preencher a largura do contêiner pai */
+    padding: 0.2rem;
+}
+
+.style-inputs:focus {
+    outline: none; /* Remove o contorno padrão do foco */
+    box-shadow: 0 0 5px var(--cor3); /* Define uma sombra ao redor do input quando em foco */
+    border-color: var(--cor3); /* Define a cor da borda do input quando em foco */
+}
+
+#botao-input {
+    all: unset;
+    background-color: var(--cor3);
+    border-radius: 0.3rem;
+    padding: 0.2rem;
+    width: calc(10vw + 100px); /* Defina um valor base em vw e adicione um valor fixo em pixels */
+    max-width: 180px; /* Defina um tamanho máximo para o botão */
+    text-align: center;
+    color: var(--cor1);
+    transition: 1s ease;
+}
+
+#botao-input:hover {
+    transform: scale(1.1);
+    box-shadow: 1px 1px 5px var(--cor3);
+}
+
+.ancorda-esqueceu-senha {
+    color: var(--cor3);
+    transition: 1s ease;
+}
+
+.ancorda-esqueceu-senha:hover {
+    color: var(--cor1);
+    text-shadow: 1px 1px 5px var(--cor3);
+}
