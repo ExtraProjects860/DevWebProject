@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/05/2024 às 02:47
+-- Tempo de geração: 09/05/2024 às 02:26
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -56,11 +56,18 @@ CREATE TABLE `historicohoras` (
   `id_funcionario` int(11) NOT NULL,
   `horarioEsperadoEntrada` time NOT NULL,
   `horarioEsperadoSaida` time NOT NULL,
-  `dataHoraEntrada` datetime NOT NULL,
-  `dataHoraSaida` datetime NOT NULL,
-  `statusRegistro` varchar(15) NOT NULL,
-  `totalHoras` time NOT NULL
+  `dataHoraEntrada` datetime DEFAULT NULL,
+  `dataHoraSaida` datetime DEFAULT NULL,
+  `statusRegistro` varchar(15) DEFAULT NULL,
+  `totalHoras` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `historicohoras`
+--
+
+INSERT INTO `historicohoras` (`id_histórico`, `id_funcionario`, `horarioEsperadoEntrada`, `horarioEsperadoSaida`, `dataHoraEntrada`, `dataHoraSaida`, `statusRegistro`, `totalHoras`) VALUES
+(1, 1, '09:00:00', '14:00:00', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -144,7 +151,7 @@ ALTER TABLE `dadosfuncionario`
 -- AUTO_INCREMENT de tabela `historicohoras`
 --
 ALTER TABLE `historicohoras`
-  MODIFY `id_histórico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_histórico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `historicojustificativas`
