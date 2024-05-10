@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +29,7 @@ main {
 /* Define o tamanho máximo da fonte */
 @media screen and (min-width: 1200px) {
     .fonte-labels {
-        font-size: 36px; /* Tamanho máximo da fonte */
+        font-size: 25px; /* Tamanho máximo da fonte */
     }
 }
 
@@ -36,16 +37,15 @@ main {
     display: flex;
     justify-content: center;
     align-items: center; 
-    height: 100vh; 
+    height: 95vh; 
 }
 
 #formulario {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-items: center;
     background-color: var(--cor2);
-    padding: 7.5%;
+    padding: 4.5%;
     height: 25rem;
     border-radius: 2.5rem;
     transition: 2s ease;
@@ -93,4 +93,19 @@ main {
 .ancorda-esqueceu-senha:hover {
     color: var(--cor1);
     text-shadow: 1px 1px 5px var(--cor3);
+}
+
+.div-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    width: 25%;
+    margin-top: 30px;
+}
+
+.fonte-senha {
+    font-size: 15px;
+    margin-right: 6px;
 }
