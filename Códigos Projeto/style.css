@@ -1,13 +1,16 @@
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 
 * {
+    font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
 }
 
 :root {
-    --cor1: #F0F7F4;
-    --cor2: #fbfbfb;
-    --cor3: #0075A2;
+    --cor1: #FFFFFF;
+    --cor2: #F5F5F5;
+    --cor3: #597CFF;
 }
 
 main {
@@ -45,7 +48,7 @@ main {
     flex-direction: column;
     justify-content: space-around;
     background-color: var(--cor2);
-    padding: 4.5%;
+    padding: 4.5% 8%;
     height: 25rem;
     border-radius: 2.5rem;
     transition: 2s ease;
@@ -108,4 +111,49 @@ main {
 .fonte-senha {
     font-size: 15px;
     margin-right: 6px;
+}
+
+.dados {
+    display: flex;
+    justify-content: center;
+.item-dados {
+    width: 20%;
+    .item {
+        color: #597CFF;
+    }
+}
+}
+
+.btns {
+    display: flex;
+    justify-content: space-evenly;
+    .btn {
+    all: unset;
+    text-align: center;
+    margin: 1.8rem;
+    width: 15%;
+    background-color: #597CFF;
+    border-radius: 7px;
+    color: white;
+    padding: 0.3rem;
+    transition: 1s ease;
+    }
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    box-shadow: 1px 1px 5px var(--cor3);
+}
+
+.form-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: var(--cor2);
+    padding: 4.5% 8%;
+    width: 45%;
+    height: 25rem;
+    border-radius: 2.5rem;
+    transition: 2s ease;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);  
 }
