@@ -6,8 +6,8 @@ Este é um projeto desenvolvido como parte da matéria de Desenvolvimento Web na
 
 - **Figma**: Utilizado para criar os esboços e protótipos do site.
 - **HTML/CSS**: Linguagens de marcação e estilo para construção da interface do site.
-- **JavaScript**: Utilizado para adicionar interatividade e dinamismo ao site.
-- **PHP**: Linguagem server-side para desenvolvimento de funcionalidades e manipulação de dados.
+- **JavaScript**: Utilizado para adicionar interatividade e dinamismo ao site/ Linguagem server-side para desenvolvimento de funcionalidades e manipulação de dados.
+- **Node.js**: Servidor que permitirá a maninipulação dos dados no back end.
 - **MySQL**: Sistema de gerenciamento de banco de dados relacional, utilizado para armazenar informações dos funcionários e registros de ponto.
 - **Trello**: Utilizado para o planejamento do projeto, acompanhamento das tarefas e divisão de responsabilidades.
 - **Discord**: Ferramenta de comunicação utilizada para reuniões, discussões e coordenação da equipe.
