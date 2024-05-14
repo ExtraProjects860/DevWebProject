@@ -9,6 +9,7 @@ Este é um projeto desenvolvido como parte da matéria de Desenvolvimento Web na
 - **JavaScript**: Utilizado para adicionar interatividade e dinamismo ao site/ Linguagem server-side para desenvolvimento de funcionalidades e manipulação de dados.
 - **Node.js**: Servidor que permitirá a maninipulação dos dados no back end.
 - **MySQL**: Sistema de gerenciamento de banco de dados relacional, utilizado para armazenar informações dos funcionários e registros de ponto.
+- **Xampp**: Servidor que server como alocação do banco de dados e interage com o Node.js.
 - **Trello**: Utilizado para o planejamento do projeto, acompanhamento das tarefas e divisão de responsabilidades.
 - **Discord**: Ferramenta de comunicação utilizada para reuniões, discussões e coordenação da equipe.
 - **Visual Studio Code**: Editor de código utilizado para escrever e editar o código-fonte do projeto.
@@ -51,8 +52,8 @@ Este é um projeto desenvolvido como parte da matéria de Desenvolvimento Web na
 
 1. Clone este repositório.
 2. Importe o banco de dados MySQL disponível no diretório `database`.
-3. Configure as credenciais do banco de dados no arquivo `config.php`.
-4. Execute o servidor PHP ou utilize um ambiente de desenvolvimento como XAMPP, WAMP, ou similar.
+3. Configure as credenciais do banco de dados no arquivo `ConnectionDatabase.js`.
+4. Execute um ambiente de desenvolvimento Node.js e um como XAMPP, WAMP, ou similar para alocar o banco de dados.
 5. Acesse o site através do seu navegador.
 
 ## Equipe
