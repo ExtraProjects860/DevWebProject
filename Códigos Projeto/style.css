@@ -157,3 +157,12 @@ main {
     transition: 2s ease;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);  
 }
+
+.conteudo {
+    display: none;
+}
+
+.conteudo.mostrar {
+    display: block;
+}
+

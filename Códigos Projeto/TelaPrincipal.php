@@ -28,20 +28,32 @@
         </div>
         <hr>
         <div class="btns">
-            <button class="btn">
+            <button class="btn" onclick="mostrarDiv('corpo-formulario')">
                 Marcar ponto
             </button>
-            <button class="btn">
+            <button class="btn" onclick="mostrarDiv('justificativa')">
                 Justificativa
             </button>
-            <button class="btn">
+            <button class="btn" onclick="mostrarDiv('historico')">
                 Histórico
             </button>
         </div>
-        <div id="corpo-formulario">
+        <div id="corpo-formulario" class="conteudo" style="display:none;">
+        <p>To no ponto</p>
             <img src="" alt="">
-            <form class="form-1" >
-                
+            <form class="form-1" >     
+            </form>
+        </div>
+        <div id="justificativa" class="conteudo" style="display:none;">
+        <p>To na justificativa</p>
+            <img src="" alt="">
+            <form class="form-2" >     
+            </form>
+        </div>
+        <div id="historico" class="conteudo" style="display:none;">
+        <p>To no historico</p>
+            <img src="" alt="">
+            <form class="form-1" >     
             </form>
         </div>
     </main>    
@@ -51,6 +63,6 @@
 
         dadosFuncionarioMain();
     ?>
-    
+    <script src="script.js"></script>
 </body>
 </html>
