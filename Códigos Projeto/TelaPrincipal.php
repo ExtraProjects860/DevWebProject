@@ -28,7 +28,7 @@
         </div>
         <hr>
         <div class="btns">
-            <button class="btn" onclick="mostrarDiv('corpo-formulario')">
+            <button class="btn" onclick="mostrarDiv('marcar-ponto')">
                 Marcar ponto
             </button>
             <button class="btn" onclick="mostrarDiv('justificativa')">
@@ -38,20 +38,17 @@
                 Histórico
             </button>
         </div>
-        <div id="corpo-formulario" class="conteudo" style="display:none;">
-        <p>To no ponto</p>
+        <div id="marcar-ponto" class="conteudo" style="display:none;">
             <img src="" alt="">
             <form class="form-1" >     
             </form>
         </div>
         <div id="justificativa" class="conteudo" style="display:none;">
-        <p>To na justificativa</p>
             <img src="" alt="">
-            <form class="form-2" >     
+            <form class="form-1" >     
             </form>
         </div>
         <div id="historico" class="conteudo" style="display:none;">
-        <p>To no historico</p>
             <img src="" alt="">
             <form class="form-1" >     
             </form>

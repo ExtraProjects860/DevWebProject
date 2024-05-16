@@ -8,11 +8,11 @@ function mostrarDiv(id) {
     // Mostra a div correspondente ao botão clicado
     const divParaMostrar = document.getElementById(id);
     if (divParaMostrar) {
-        divParaMostrar.style.display = 'block';
+        divParaMostrar.style.display = 'flex';
     }
 }
 // Adiciona um evento para mostrar a div inicial quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
-    mostrarDiv('corpo-formulario'); 
+    mostrarDiv('marcar-ponto'); 
 });
 

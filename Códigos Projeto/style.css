@@ -160,9 +160,12 @@ main {
 
 .conteudo {
     display: none;
+    justify-content: center;
+    align-items: center; 
+    height: 95vh; 
 }
 
 .conteudo.mostrar {
-    display: block;
+    display: flex;
 }
 
