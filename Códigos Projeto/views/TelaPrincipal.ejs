@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>TelaPrincipal</title>
+  </head>
+  <body>
+    <main>
+      <div class="popup-overlay" id="popupOverlay" style="display: none;">
+        <div class="popup" id="popupContent"></div>
+      </div>
+      <div class="div-logo">
+        <img class="logo-tela-principal" src="/img/Ponto_2.png" alt="logo" />
+      </div>
+      <hr />
+      <div class="dados" id="dadosFuncionario">
+        <div class="item-dados">
+          <p class="item">Colaborador:</p>
+          <p id="nomeFuncionario"><%= nome %></p>
+        </div>
+        <div class="item-dados">
+          <p class="item">Horário de entrada:</p>
+          <p id="horarioEntrada"><%= horarioEsperadoEntrada %></p>
+        </div>
+        <div class="item-dados">
+          <p class="item">Horário de saída:</p>
+          <p id="horarioSaida"><%= horarioEsperadoSaida %></p>
+        </div>
+      </div>
+      <hr />
+      <div class="btns">
+        <button class="btn" id="marcar-ponto">Marcar ponto</button>
+        <button class="btn" id="justificativa">Justificativa</button>
+        <button class="btn" id="historico">Histórico</button>
+      </div>
+      <div class="container-registro">
+        <div id="corpo-formulario-registro">
+          <form class="form-1" id="formRegistroHoras" action="/registrar">
+            <h1 id="relogio"></h1>
+            <h2>Seja bem vindo!</h2>
+            <img src="/img/Clock.png" alt="" />
+            <button class="btn" type="submit">Registrar</button>
+          </form>
+        </div>
+      </div>
+      <div class="btns-alterar-sair">
+        <button class="btn" id="alterarDados">Alterar Dados</button>
+        <button class="btn" id="sairBtn">Sair</button>
+      </div>
+    </main>
+    <script src="/js/clientController.js"></script>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+Login:
+CREATE TABLE Login (
+    id_login INT NOT NULL AUTO_INCREMENT,
+    id_funcionario INT NOT NULL,
+    cpf VARCHAR(15) NOT NULL,
+    senha VARCHAR(20) NOT NULL,
+    PRIMARY KEY (id_login),
+    UNIQUE (cpf),
+    FOREIGN KEY (id_funcionario) REFERENCES DadosFuncionario(id_funcionario)
+);
+
+DadosFuncionario:
+CREATE TABLE DadosFuncionario (
+    id_funcionario INT NOT NULL AUTO_INCREMENT,
+    cpf VARCHAR(15) NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    dataNascimento DATE NOT NULL,
+    endereco VARCHAR(100) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    telefone INT NOT NULL,
+    profissao VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id_funcionario),
+    UNIQUE (cpf)
+);
+
+HistoricoHoras:
+CREATE TABLE HistoricoHoras (
+    id_histórico INT NOT NULL AUTO_INCREMENT,
+    id_funcionario INT NOT NULL,
+    horarioEsperadoEntrada TIME NOT NULL,
+    horarioEsperadoSaida TIME NOT NULL,
+    dataHoraEntrada DATETIME DEFAULT NULL,
+    dataHoraSaida DATETIME DEFAULT NULL,
+    statusRegistro VARCHAR(15) DEFAULT NULL,
+    totalHoras TIME NOT NULL,
+    PRIMARY KEY (id_histórico),
+    FOREIGN KEY (id_funcionario) REFERENCES DadosFuncionario(id_funcionario)
+);
+
+HistoricoJustificativas:
+CREATE TABLE HistoricoJustificativas (
+    id_justificativa INT NOT NULL AUTO_INCREMENT,
+    id_funcionario INT NOT NULL,
+    dataJustificativa DATE DEFAULT NULL,
+    descricaoJustificativa VARCHAR(255) DEFAULT NULL,
+    documentoApoio VARCHAR(255) DEFAULT NULL,
+    statusJustificativa VARCHAR(15) NOT NULL,
+    PRIMARY KEY (id_justificativa),
+    FOREIGN KEY (id_funcionario) REFERENCES DadosFuncionario(id_funcionario)
+);
+
+
+teste:
+-- Inserir dados de exemplo na tabela DadosFuncionario
+INSERT INTO DadosFuncionario (cpf, nome, dataNascimento, endereco, email, telefone, profissao)
+VALUES ('12345678900', 'João Silva', '1990-01-01', 'Rua Exemplo, 123', 'joao@example.com', 1234567890, 'Desenvolvedor');
+
+-- Inserir dados de exemplo na tabela Login
+INSERT INTO Login (id_funcionario, cpf, senha)
+VALUES (1, '12345678900', 'senha123');

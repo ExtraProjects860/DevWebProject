@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>Login</title>
+  </head>
+  <body>
+    <main>
+      <div id="corpo-formulario-login">
+        <img class="logo-login" src="/img/Ponto_2.png" alt="logo" />
+        <form action="/login" method="post" id="formulario">
+          <label for="cpf" class="fonte-labels">CPF</label>
+          <input
+            type="text"
+            name="cpf"
+            id="cpf"
+            class="style-inputs"
+            placeholder="Digite seu CPF"
+            required
+          />
+
+          <label for="senha" class="fonte-labels">Senha</label>
+          <input
+            type="password"
+            name="senha"
+            id="senha"
+            class="style-inputs"
+            placeholder="Digite sua Senha"
+            required
+          />
+
+          <label for="versenha"
+            ><input type="checkbox" name="versenha" id="versenha" /> Ver
+            senha</label
+          >
+
+          <button type="submit" id="botao-input">Entrar</button>
+
+          <p>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="ancorda-esqueceu-senha"
+              >Esqueceu sua senha?</a
+            >
+          </p>
+        </form>
+      </div>
+    </main>
+    <script src="/js/clientController.js"></script>
+  </body>
+</html>
