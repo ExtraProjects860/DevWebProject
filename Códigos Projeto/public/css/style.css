@@ -1,272 +1,392 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 
 * {
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-    --cor1: #FFFFFF;
-    --cor2: #F5F5F5;
-    --cor3: #597CFF;
-    --cor4: #2956f9;
+  --cor1: #ffffff;
+  --cor2: #f5f5f5;
+  --cor3: #597cff;
+  --cor4: #2956f9;
 }
 
 main {
-    width: 100%;
-    background-color: var(--cor1);
+  width: 100%;
+  background-color: var(--cor1);
 }
 
 .fonte-labels {
-    font-size: 3vw; /* Tamanho inicial da fonte */
+  font-size: 3vw; /* Tamanho inicial da fonte */
 }
 
 /* Define o tamanho mínimo da fonte para dispositivos móveis */
 @media screen and (max-width: 600px) {
-    .fonte-labels {
-        font-size: 16px; /* Tamanho mínimo da fonte para dispositivos móveis */
-    }
+  .fonte-labels {
+    font-size: 16px; /* Tamanho mínimo da fonte para dispositivos móveis */
+  }
 }
 
 /* Define o tamanho máximo da fonte */
 @media screen and (min-width: 1200px) {
-    .fonte-labels {
-        font-size: 25px; /* Tamanho máximo da fonte */
-    }
+  .fonte-labels {
+    font-size: 25px; /* Tamanho máximo da fonte */
+  }
 }
 
 #corpo-formulario-login {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: 95vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
 }
 
 .container-principal {
-    height: 55vh; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 55vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #corpo-formulario-registro {
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    height: 55vh; 
-    width: 100%; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55vh;
+  width: 100%;
 }
 
 #formulario {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    background-color: var(--cor2);
-    padding: 4.5% 8%;
-    height: 25rem;
-    border-radius: 2.5rem;
-    transition: 2s ease;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: var(--cor2);
+  padding: 4.5% 8%;
+  height: 25rem;
+  border-radius: 2.5rem;
+  transition: 2s ease;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
 }
 
-.style-inputs{
-    all: unset;
-    background-color: var(--cor1);
-    border-radius:  0.3rem;
-    height: 1.5rem;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.189);
-    width: 100%; /* Defina a largura como 100% para preencher a largura do contêiner pai */
-    padding: 0.2rem;
+.style-inputs {
+  all: unset;
+  background-color: var(--cor1);
+  border-radius: 0.3rem;
+  height: 1.5rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.189);
+  width: 100%; /* Defina a largura como 100% para preencher a largura do contêiner pai */
+  padding: 0.2rem;
 }
 
 .style-inputs:focus {
-    outline: none; /* Remove o contorno padrão do foco */
-    box-shadow: 0 0 5px var(--cor3); /* Define uma sombra ao redor do input quando em foco */
-    border-color: var(--cor3); /* Define a cor da borda do input quando em foco */
+  outline: none; /* Remove o contorno padrão do foco */
+  box-shadow: 0 0 5px var(--cor3); /* Define uma sombra ao redor do input quando em foco */
+  border-color: var(--cor3); /* Define a cor da borda do input quando em foco */
 }
 
 #botao-input {
-    all: unset;
-    background-color: var(--cor3);
-    border-radius: 0.3rem;
-    padding: 0.2rem;
-    width: calc(10vw + 100px); /* Defina um valor base em vw e adicione um valor fixo em pixels */
-    max-width: 180px; /* Defina um tamanho máximo para o botão */
-    text-align: center;
-    color: var(--cor1);
-    transition: 1s ease;
+  all: unset;
+  background-color: var(--cor3);
+  border-radius: 0.3rem;
+  padding: 0.2rem;
+  width: calc(
+    10vw + 100px
+  ); /* Defina um valor base em vw e adicione um valor fixo em pixels */
+  max-width: 180px; /* Defina um tamanho máximo para o botão */
+  text-align: center;
+  color: var(--cor1);
+  transition: 1s ease;
 }
 
 #botao-input:hover {
-    background-color: var(--cor4);
-    box-shadow: 1px 1px 5px var(--cor3);
+  background-color: var(--cor4);
+  box-shadow: 1px 1px 5px var(--cor3);
 }
 
 .ancorda-esqueceu-senha {
-    color: var(--cor3);
-    transition: 1s ease;
+  color: var(--cor3);
+  transition: 1s ease;
 }
 
 .ancorda-esqueceu-senha:hover {
-    color: var(--cor4);
-    text-shadow: 1px 1px 5px var(--cor3);
+  color: var(--cor4);
+  text-shadow: 1px 1px 5px var(--cor3);
 }
 
 .div-logo {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .logo-login {
-    width: 25%;
-    margin-top: 30px;
+  width: 25%;
+  margin-top: 30px;
 }
 
 .logo-tela-principal {
-    width: 15%;
-    margin-top: 30px;
+  width: 15%;
+  margin-top: 30px;
 }
 
 .fonte-senha {
-    font-size: 15px;
-    margin-right: 6px;
+  font-size: 15px;
+  margin-right: 6px;
 }
 
 .dados {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .item-dados {
-    width: 20%;
+  width: 20%;
 }
 
 .item {
-    color: #597CFF;
+  color: #597cff;
 }
 
-
 .btns {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .btn {
-    all: unset;
-    text-align: center;
-    margin: 1.2rem;
-    width: 15%;
-    text-align: center;
-    background-color: var(--cor3);
-    border-radius: 7px;
-    color: white;
-    padding: 0.3rem 0.7rem;
-    transition: 1s ease;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.415); 
+  all: unset;
+  text-align: center;
+  margin: 1.2rem;
+  width: 15%;
+  text-align: center;
+  background-color: var(--cor3);
+  border-radius: 7px;
+  color: white;
+  padding: 0.3rem 0.7rem;
+  transition: 1s ease;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.415);
 }
 
 .btns-alterar-sair {
-    display: flex;
-    justify-content: right;
-    margin-right: 10%;
+  display: flex;
+  justify-content: right;
+  margin-right: 10%;
 }
 
 .btn:hover {
-    background-color: var(--cor4);
-    box-shadow: 1px 1px 5px var(--cor3);
+  background-color: var(--cor4);
+  box-shadow: 1px 1px 5px var(--cor3);
 }
 
 .form-1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    background-color: var(--cor2);
-    padding: 4.5% 8%;
-    width: 35%;
-    height: 15rem;
-    border-radius: 2.5rem;
-    transition: 2s ease;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--cor2);
+  padding: 4.5% 8%;
+  width: 35%;
+  height: 15rem;
+  border-radius: 2.5rem;
+  transition: 2s ease;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
 }
 
 .popup-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
 }
 
 .popup {
-    background: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    text-align: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .popup button {
-    margin: 5px;
+  margin: 5px;
 }
 
 .container-registro {
-    transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .container-registro.hidden {
-    opacity: 0;
-    pointer-events: none; 
+  opacity: 0;
+  pointer-events: none;
 }
 
 #container-justificativa {
-    display: flex;
-    justify-content: center;
-    gap: 4.5%;
-    margin: 2.7%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4.5%;
+  margin: 2.7%;
 }
 
 .blocos-justificativa {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    background-color: var(--cor2);
-    padding: 4.5% 6%;
-    height: 25rem;
-    border-radius: 2.5rem;
-    gap: 10%;
-    transition: 2s ease;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
-    box-sizing: border-box; 
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: var(--cor2);
+  padding: 4.5% 6%;
+  height: 25rem;
+  border-radius: 2.5rem;
+  gap: 10%;
+  transition: 2s ease;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
 }
 
 .inputs-justificativa {
-    all: unset;
-    background-color: var(--cor1);
-    border-radius: 0.3rem;
-    height: 1.5rem;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.189);
-    width: 100%;
-    padding: 0.2rem;
-    box-sizing: border-box; 
+  all: unset;
+  background-color: var(--cor1);
+  border-radius: 0.3rem;
+  height: 1.5rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.189);
+  width: 100%;
+  padding: 0.2rem;
+  box-sizing: border-box;
 }
 
 .textarea-justificativa {
-    box-sizing: border-box; 
-    padding: 0.5rem; 
-    resize: none; 
-    overflow: auto;
-    min-height: 5rem; 
-    max-height: 25rem; 
+  box-sizing: border-box;
+  padding: 0.5rem;
+  resize: none;
+  overflow: auto;
+  min-height: 5rem;
+  max-height: 25rem;
 }
 
 .alinhamento-btns-jus {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.controls button {
+  margin: 0 10px;
+  padding: 5px 10px;
+}
+
+.table-container {
+  width: 90%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.189);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Remover bordas entre células e ajustar arredondamento */
+table tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+table tr:first-child th:last-child {
+  border-top-right-radius: 10px;
+}
+
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.horas {
+  text-align: center;
+  margin-top: 3vh;
+}
+
+#totalHoras {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.container-centralizar {
+  display: flex;
+  justify-content: center;
+}
+
+#bloco-legenda {
+    margin: 1.5rem;
+}
+
+#titulo-legenda {
+  text-align: center;
+  margin: 1rem;
+}
+
+#tipos-legenda {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.item-legenda {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.retangulo {
+  width: 3rem;
+  height: 1rem;
+  border-radius: 1rem;
+}
+
+.consistente {
+  background-color: #8bd9ca;
+}
+
+.inconsistente {
+  background-color: #f2d4ae; 
+}
+
+.falta {
+  background-color: #fe787f;
+}
+
+.justificativa {
+  background-color: #d9d9d9;
+}
+
+.texto-legenda {
+    font-size: 14px;
+    color: black; /* Ajuste conforme necessário para melhor legibilidade */
+  }

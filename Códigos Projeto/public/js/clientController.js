@@ -2,10 +2,10 @@ class ClientController {
   constructor() {
     this.initElements();
     this.initEventListeners();
-    this.timetOutTransitions = 300;
+    this.timeoutTransitions = 300;
+    this.currentDate = new Date();
   }
 
-  
   initElements() {
     this.popupContent = document.getElementById("popupContent");
     this.popupOverlay = document.getElementById("popupOverlay");
@@ -17,8 +17,9 @@ class ClientController {
     this.containerRegistro = document.querySelector(".container-registro");
     this.formRegistroHoras = document.getElementById("formRegistroHoras");
     this.btns = document.querySelectorAll(".btns button");
+    this.prevMonthBtn = document.getElementById("prevMonth");
+    this.nextMonthBtn = document.getElementById("nextMonth");
   }
-
 
   initEventListeners() {
     this.btns.forEach((btn) => {
@@ -35,7 +36,7 @@ class ClientController {
             "Deseja realmente sair?",
             () => (window.location.href = "/logout")
           );
-        }, this.timetOutTransitions);
+        }, this.timeoutTransitions);
       });
     }
 
@@ -44,7 +45,7 @@ class ClientController {
         setTimeout(() => {
           this.fadeIn(this.popupOverlay);
           this.exibirPopUpAlterarDados();
-        }, this.timetOutTransitions);
+        }, this.timeoutTransitions);
       });
     }
 
@@ -63,7 +64,6 @@ class ClientController {
       });
     }
   }
-
 
   registrarHorasEntradaSaida() {
     const form = document.querySelector(".form-1");
@@ -99,7 +99,6 @@ class ClientController {
     }
   }
 
-
   verificarSenha() {
     if (this.checkbox && this.senhaInput) {
       this.checkbox.addEventListener("change", () => {
@@ -109,7 +108,6 @@ class ClientController {
       console.error("Elemento com ID 'versenha' ou 'senha' não encontrado.");
     }
   }
-
 
   formatarCPF() {
     let cpf = this.cpfInput.value.replace(/\D/g, "");
@@ -133,7 +131,6 @@ class ClientController {
     }
   }
 
-
   iniciarFormatacaoCPF() {
     if (this.cpfInput) {
       this.cpfInput.addEventListener("input", () => {
@@ -148,7 +145,6 @@ class ClientController {
       console.error("Elemento com ID 'cpf' não encontrado.");
     }
   }
-
 
   atualizarRelogio() {
     const adicionarZero = (i) => (i < 10 ? "0" + i : i);
@@ -169,20 +165,18 @@ class ClientController {
     }
   }
 
-
   formatarDataHora(data) {
     const adicionarZero = (i) => (i < 10 ? "0" + i : i);
-  
+
     const ano = data.getFullYear();
     const mes = adicionarZero(data.getMonth() + 1);
     const dia = adicionarZero(data.getDate());
     const horas = adicionarZero(data.getHours());
     const minutos = adicionarZero(data.getMinutes());
     const segundos = adicionarZero(data.getSeconds());
-  
+
     return `${ano}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
   }
-
 
   sairLogin() {
     if (this.sairBtn && this.popupOverlay) {
@@ -193,7 +187,7 @@ class ClientController {
             "Deseja realmente sair?",
             () => (window.location.href = "/logout")
           );
-        }, this.timetOutTransitions);
+        }, this.timeoutTransitions);
       });
     } else {
       console.error(
@@ -202,20 +196,18 @@ class ClientController {
     }
   }
 
-
   alterarDadosLogin() {
     if (this.alterarDados) {
       this.alterarDados.addEventListener("click", () => {
         setTimeout(() => {
           this.fadeIn(this.popupOverlay);
           this.exibirPopUpAlterarDados();
-        }, this.timetOutTransitions);
+        }, this.timeoutTransitions);
       });
     } else {
       console.error("Botão de alterar dados não encontrado.");
     }
   }
-
 
   adicionarEventosFormularioAlterarDados() {
     const confirmarAlteracao = document.getElementById("confirmarAlteracao");
@@ -236,7 +228,7 @@ class ClientController {
             },
             body: JSON.stringify({ cpf, senhaAtual, novaSenha }),
           })
-            .then(response => {
+            .then((response) => {
               if (response.ok) {
                 return response.json();
               } else {
@@ -245,15 +237,15 @@ class ClientController {
                 });
               }
             })
-            .then(data => {
+            .then((data) => {
               alert("Dados alterados com sucesso! Faça Login Novamente!");
               window.location.href = "/logout";
-              window.history.pushState(null, null, '/');
-              window.addEventListener('popstate', function(event) {
-                window.history.pushState(null, null, '/');
+              window.history.pushState(null, null, "/");
+              window.addEventListener("popstate", function (event) {
+                window.history.pushState(null, null, "/");
               });
             })
-            .catch(error => {
+            .catch((error) => {
               console.error("Erro ao fazer a requisição:", error);
               alert(`Erro ao fazer a requisição: ${error.message}`);
             });
@@ -269,7 +261,6 @@ class ClientController {
       });
     }
   }
-
 
   criarFormularioAlterarDados() {
     if (this.popupContent) {
@@ -291,7 +282,6 @@ class ClientController {
     }
   }
 
-
   exibirPopUpAlterarDados() {
     this.criarFormularioAlterarDados();
     this.adicionarEventosFormularioAlterarDados();
@@ -301,9 +291,8 @@ class ClientController {
         this.hidePopup();
       });
       this.fadeIn(this.popupOverlay);
-    }, this.timetOutTransitions);
+    }, this.timeoutTransitions);
   }
-
 
   exibirPopupSair(message, confirmCallback) {
     if (this.popupOverlay && this.popupContent) {
@@ -330,13 +319,11 @@ class ClientController {
     }
   }
 
-
   hidePopup() {
     if (this.popupOverlay) {
       this.popupOverlay.style.display = "none";
     }
   }
-
 
   fadeIn(element) {
     element.style.opacity = 0;
@@ -350,65 +337,186 @@ class ClientController {
     })();
   }
 
+  changeMonth(monthChange) {
+    this.currentDate.setMonth(this.currentDate.getMonth() + monthChange);
+    this.updateCalendar();
+  }
+
+  updateCalendar() {
+    const monthYearSpan = document.getElementById("monthYear");
+    const calendarBody = document.getElementById("calendarBody");
+
+    if (!monthYearSpan || !calendarBody) return;
+
+    const year = this.currentDate.getFullYear();
+    const month = this.currentDate.getMonth();
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const monthNames = [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
+    ];
+
+    monthYearSpan.textContent = `${monthNames[month]} ${year}`;
+
+    calendarBody.innerHTML = "";
+
+    let row = document.createElement("tr");
+    for (let i = 0; i < firstDay; i++) {
+      const cell = document.createElement("td");
+      row.appendChild(cell);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      if (row.children.length === 7) {
+        calendarBody.appendChild(row);
+        row = document.createElement("tr");
+      }
+
+      const cell = document.createElement("td");
+      cell.textContent = day;
+      row.appendChild(cell);
+    }
+
+    if (row.children.length > 0) {
+      while (row.children.length < 7) {
+        const cell = document.createElement("td");
+        row.appendChild(cell);
+      }
+      calendarBody.appendChild(row);
+    }
+  }
 
   trocarConteudoPrincipal(btnId) {
-    switch (btnId) {
-      case "marcar-ponto":
-        this.containerRegistro.classList.add("hidden");
-        setTimeout(() => {
+    this.containerRegistro.classList.add("hidden");
+    setTimeout(() => {
+      switch (btnId) {
+        case "marcar-ponto":
           this.containerRegistro.innerHTML = `
-                        <div id="corpo-formulario-registro">
-                            <form class="form-1" >
-                                <h1 id="relogio"></h1>
-                                <h2>Seja bem vindo!</h2>
-                                <img src="/img/Clock.png" alt="">
-                                <button class="btn">
-                                    Registrar
-                                </button>
-                            </form>
-                        </div>
-                    `;
-          this.containerRegistro.classList.remove("hidden");
+                    <div id="corpo-formulario-registro">
+                        <form class="form-1">
+                            <h1 id="relogio"></h1>
+                            <h2>Seja bem vindo!</h2>
+                            <img src="/img/Clock.png" alt="">
+                            <button class="btn">
+                                Registrar
+                            </button>
+                        </form>
+                    </div>
+                `;
           this.atualizarRelogio();
-        }, this.timetOutTransitions);
-        break;
-      case "justificativa":
-        this.containerRegistro.classList.add("hidden");
-        setTimeout(() => {
+          this.registrarHorasEntradaSaida();
+          break;
+        case "justificativa":
           this.containerRegistro.innerHTML = `
-                        <div id="container-justificativa">
-                            <form class="blocos-justificativa" action="/registrar-justificava" method="post">
-                                <h3>Faça aqui sua justificativa em caso de imprevistos</h3>
-                                <input type="date" name="" id="" class="inputs-justificativa">
-                                <input type="time" name="" id="" class="inputs-justificativa">
-                                <textarea name="" id="" class="textarea-justificativa"></textarea>
-                                <div class="alinhamento-btns-jus">
-                                    <p><img src="" alt="">Anexar documento</p>
-                                    <button type="submit" class="btn">Justificar</button>
-                                </div>
-                            </form>
-                            <form class="blocos-justificativa">
-                                <h3>Veja aqui seu histórico de justificativas</h3>
-                                <table></table>
-                                <div class="alinhamento-btns-jus">
-                                    <button class="btn" >Anterior</button>
-                                    <button class="btn" >Próximo</button>
-                                </div>
-                            </form>
+                    <div id="container-justificativa">
+                        <form class="blocos-justificativa" action="/registrar-justificava" method="post">
+                            <h3>Faça aqui sua justificativa em caso de imprevistos</h3>
+                            <input type="date" name="" id="" class="inputs-justificativa">
+                            <input type="time" name="" id="" class="inputs-justificativa">
+                            <textarea name="" id="" class="textarea-justificativa"></textarea>
+                            <div class="alinhamento-btns-jus">
+                                <p><img src="" alt="">Anexar documento</p>
+                                <button type="submit" class="btn">Justificar</button>
+                            </div>
+                        </form>
+                        <form class="blocos-justificativa">
+                            <h3>Veja aqui seu histórico de justificativas</h3>
+                            <table></table>
+                            <div class="alinhamento-btns-jus">
+                                <button class="btn">Anterior</button>
+                                <button class="btn">Próximo</button>
+                            </div>
+                        </form>
+                    </div>
+                `;
+          break;
+        case "historico":
+          this.containerRegistro.innerHTML = `
+                    <div id="container-historicohoras">
+                    <h1 class="horas">Total de horas</h1>
+                    <p id="totalHoras"></p>
+                        <div class="controls">
+                            <button id="prevMonth">◀</button>
+                            <span id="monthYear"></span>
+                            <button id="nextMonth">▶</button>
                         </div>
-                      `;
-          this.containerRegistro.classList.remove("hidden");
-        }, this.timetOutTransitions);
-        break;
-      case "historico":
-        this.containerRegistro.classList.add("hidden");
-        setTimeout(() => {
-          this.containerRegistro.innerHTML = `<p>Tela Histórico</p>`;
-          this.containerRegistro.classList.remove("hidden");
-        }, this.timetOutTransitions);
-        break;
-      default:
-        console.error("Botão não reconhecido:", btnId);
+                        <div class="container-centralizar">
+                        <div class="table-container">
+                            <table id="hoursTable">
+                                <thead>
+                                    <tr>
+                                        <th>Domingo</th>
+                                        <th>Segunda</th>
+                                        <th>Terça</th>
+                                        <th>Quarta</th>
+                                        <th>Quinta</th>
+                                        <th>Sexta</th>
+                                        <th>Sábado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calendarBody">
+                                </tbody>
+                            </table>
+                            <div id="bloco-legenda">
+                            <p id="titulo-legenda">Legenda:</p>
+                            <div id="tipos-legenda">
+                              <div class="item-legenda">
+                                <span class="retangulo consistente"></span>
+                                <span class="texto-legenda">Horas Consistentes</span>
+                              </div>
+                              <div class="item-legenda">
+                                <span class="retangulo inconsistente"></span>
+                                <span class="texto-legenda">Horas Inconsistentes</span>
+                              </div>
+                              <div class="item-legenda">
+                                <span class="retangulo falta"></span>
+                                <span class="texto-legenda">Faltas</span>
+                              </div>
+                              <div class="item-legenda">
+                                <span class="retangulo justificativa"></span>
+                                <span class="texto-legenda">Justificativa</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                `;
+          this.updateCalendar();
+          this.initCalendarNavigation();
+          break;
+        default:
+          console.error("Botão não reconhecido:", btnId);
+      }
+      this.containerRegistro.classList.remove("hidden");
+    }, this.timeoutTransitions);
+  }
+
+  initCalendarNavigation() {
+    const prevMonthBtn = document.getElementById("prevMonth");
+    const nextMonthBtn = document.getElementById("nextMonth");
+
+    if (prevMonthBtn && nextMonthBtn) {
+      prevMonthBtn.addEventListener("click", () => {
+        this.changeMonth(-1);
+      });
+
+      nextMonthBtn.addEventListener("click", () => {
+        this.changeMonth(1);
+      });
     }
   }
 }
@@ -421,4 +529,6 @@ document.addEventListener("DOMContentLoaded", () => {
   clientController.sairLogin();
   clientController.alterarDadosLogin();
   clientController.registrarHorasEntradaSaida();
+  clientController.updateCalendar(); // Atualiza o calendário na inicialização
+  clientController.initCalendarNavigation();
 });
