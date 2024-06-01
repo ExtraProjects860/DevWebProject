@@ -206,9 +206,20 @@ main {
 
 .popup {
   background: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
+  padding: 30px;
+  border-radius: 3vh;
+  display: flex;
+  gap: 0.5vh;
+  flex-direction: column;
+  height: 40%;
+  width: 20%;
+  p {
+    text-align: center;
+    font-size: 20px;
+  }
+  label {
+    color: #597cff;
+  }
 }
 
 .popup button {
@@ -275,8 +286,7 @@ main {
 
 .controls {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
   margin-bottom: 20px;
 }
 
@@ -344,7 +354,7 @@ table tr:last-child td:last-child {
 }
 
 #bloco-legenda {
-    margin: 1.5rem;
+  margin: 1.5rem;
 }
 
 #titulo-legenda {
@@ -375,7 +385,7 @@ table tr:last-child td:last-child {
 }
 
 .inconsistente {
-  background-color: #f2d4ae; 
+  background-color: #f2d4ae;
 }
 
 .falta {
@@ -387,6 +397,94 @@ table tr:last-child td:last-child {
 }
 
 .texto-legenda {
-    font-size: 14px;
-    color: black; /* Ajuste conforme necessário para melhor legibilidade */
+  font-size: 14px;
+  color: black; /* Ajuste conforme necessário para melhor legibilidade */
+}
+
+.btns-controls {
+  background-color: #597cff;
+  margin-right: 5%;
+  display: flex;
+  gap: 2vh;
+  padding: 0.5vh;
+  border-radius: 1vh;
+}
+
+#nextMonth {
+  all: unset;
+  color: #fff;
+}
+
+#prevMonth {
+  all: unset;
+  color: #fff;
+}
+
+#monthYear {
+  display: flex;
+  justify-content: center;
+}
+
+.input-alterar-dados {
+  border-radius: 1vh;
+  border: none;
+  height: 3vh;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
+}
+
+.input-alterar-dados:focus {
+  outline: none; /* Remove o contorno padrão do foco */
+  box-shadow: 0 0 5px var(--cor3); /* Define uma sombra ao redor do input quando em foco */
+  border-color: var(--cor3); /* Define a cor da borda do input quando em foco */
+}
+
+.btns-alteracao {
+  display: flex;
+  justify-content: center;
+  li {
+    list-style-type: none;
   }
+}
+
+.cancelarBtn {
+  all: unset;
+  border-radius: 1vh;
+  background-color: #fe787f;
+  height: 4vh;
+  width: 12vh;
+  color: white;
+  text-align: center;
+  margin: 0 2vh;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
+  transition: 1s ease;
+}
+
+.cancelarBtn:hover {
+  background-color: #d45057;
+}
+
+.confirmarBtn {
+  all: unset;
+  border-radius: 1vh;
+  background-color: #8bd9ca;
+  height: 4vh;
+  width: 12vh;
+  color: white;
+  text-align: center;
+  margin: 0 2vh;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.298);
+  transition: 1s ease;
+}
+
+.confirmarBtn:hover {
+  background-color: #44bba3;
+}
+
+#container-sair {
+  margin: auto;
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}

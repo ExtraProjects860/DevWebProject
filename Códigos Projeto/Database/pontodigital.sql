@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 09/05/2024 às 02:26
+-- Tempo de geração: 02/06/2024 às 00:21
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -43,7 +43,7 @@ CREATE TABLE `dadosfuncionario` (
 --
 
 INSERT INTO `dadosfuncionario` (`id_funcionario`, `cpf`, `nome`, `dataNascimento`, `endereco`, `email`, `telefone`, `profissao`) VALUES
-(1, '12345678900', 'João Silva', '1990-01-01', 'Rua Exemplo, 123', 'joao@example.com', 1234567890, 'Desenvolvedor');
+(1, '123.456.789-00', 'João Silva', '1990-01-01', 'Rua Exemplo, 123', 'joao@example.com', 1234567890, 'Desenvolvedor');
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,7 @@ CREATE TABLE `historicohoras` (
 --
 
 INSERT INTO `historicohoras` (`id_histórico`, `id_funcionario`, `horarioEsperadoEntrada`, `horarioEsperadoSaida`, `dataHoraEntrada`, `dataHoraSaida`, `statusRegistro`, `totalHoras`) VALUES
-(1, 1, '09:00:00', '14:00:00', NULL, NULL, NULL, NULL);
+(1, 1, '09:00:00', '14:00:00', '0000-00-00 00:00:00', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -81,8 +81,15 @@ CREATE TABLE `historicojustificativas` (
   `dataJustificativa` date DEFAULT NULL,
   `descricaoJustificativa` varchar(255) DEFAULT NULL,
   `documentoApoio` varchar(255) DEFAULT NULL,
-  `statusJustificativa` varchar(15) NOT NULL
+  `statusJustificativa` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `historicojustificativas`
+--
+
+INSERT INTO `historicojustificativas` (`id_justificativa`, `id_funcionario`, `dataJustificativa`, `descricaoJustificativa`, `documentoApoio`, `statusJustificativa`) VALUES
+(1, 1, NULL, 'teste', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -102,7 +109,7 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id_login`, `id_funcionario`, `cpf`, `senha`) VALUES
-(2, 1, '12345678900', 'senha123');
+(1, 1, '123.456.789-00', 'senha123');
 
 --
 -- Índices para tabelas despejadas
@@ -157,7 +164,7 @@ ALTER TABLE `historicohoras`
 -- AUTO_INCREMENT de tabela `historicojustificativas`
 --
 ALTER TABLE `historicojustificativas`
-  MODIFY `id_justificativa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_justificativa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `login`

@@ -13,6 +13,7 @@ class ClientController {
     this.checkbox = document.getElementById("versenha");
     this.senhaInput = document.getElementById("senha");
     this.cpfInput = document.getElementById("cpf");
+    this.cpfAlterarInput = null;
     this.alterarDados = document.getElementById("alterarDados");
     this.containerRegistro = document.querySelector(".container-registro");
     this.formRegistroHoras = document.getElementById("formRegistroHoras");
@@ -22,12 +23,22 @@ class ClientController {
   }
 
   initEventListeners() {
+    this.adicionarEventListenersBotoesPrincipais();
+    this.adicionarEventListenerSair();
+    this.adicionarEventListenerAlterarDados();
+    this.adicionarEventListenerMostrarOcultarSenha();
+    this.adicionarEventListenersFormatarCPF();
+  }
+  
+  adicionarEventListenersBotoesPrincipais() {
     this.btns.forEach((btn) => {
       btn.addEventListener("click", () => {
         this.trocarConteudoPrincipal(btn.id);
       });
     });
-
+  }
+  
+  adicionarEventListenerSair() {
     if (this.sairBtn && this.popupOverlay) {
       this.sairBtn.addEventListener("click", () => {
         setTimeout(() => {
@@ -39,7 +50,9 @@ class ClientController {
         }, this.timeoutTransitions);
       });
     }
-
+  }
+  
+  adicionarEventListenerAlterarDados() {
     if (this.alterarDados) {
       this.alterarDados.addEventListener("click", () => {
         setTimeout(() => {
@@ -48,20 +61,45 @@ class ClientController {
         }, this.timeoutTransitions);
       });
     }
-
+  }
+  
+  adicionarEventListenerMostrarOcultarSenha() {
     if (this.checkbox && this.senhaInput) {
       this.checkbox.addEventListener("change", () => {
         this.senhaInput.type = this.checkbox.checked ? "text" : "password";
       });
     }
-
+  }
+  
+  adicionarEventListenersFormatarCPF() {
     if (this.cpfInput) {
-      this.cpfInput.addEventListener("input", () => this.formatarCPF());
+      this.cpfInput.addEventListener("input", () => this.formatarCPF(this.cpfInput));
       this.cpfInput.addEventListener("keypress", (e) => {
-        if (!/\d/.test(e.key)) {
-          e.preventDefault();
-        }
+          if (!/\d/.test(e.key)) {
+              e.preventDefault();
+          }
       });
+    }
+    if (this.cpfAlterarInput) {
+        this.cpfAlterarInput.addEventListener("input", () => this.formatarCPF(this.cpfAlterarInput));
+        this.cpfAlterarInput.addEventListener("keypress", (e) => {
+            if (!/\d/.test(e.key)) {
+                e.preventDefault();
+            }
+        });
+    }
+  }
+
+  formatarCPF(cpfInput) {
+    let cpf = cpfInput.value.replace(/\D/g, "");
+    if (cpf.length > 11) {
+      cpf = cpf.substring(0, 11);
+    }
+    if (cpf) {
+      if (cpf.length > 3) cpf = cpf.substring(0, 3) + "." + cpf.substring(3);
+      if (cpf.length > 7) cpf = cpf.substring(0, 7) + "." + cpf.substring(7);
+      if (cpf.length > 11) cpf = cpf.substring(0, 11) + "-" + cpf.substring(11);
+      cpfInput.value = cpf;
     }
   }
 
@@ -82,9 +120,7 @@ class ClientController {
             body: JSON.stringify({ dataHoraEntrada }),
           });
 
-          if (!response.ok) {
-            throw new Error("Erro ao registrar ponto");
-          }
+          if (!response.ok) throw new Error("Erro ao registrar ponto");
 
           const result = await response.json();
           console.log("Ponto registrado com sucesso:", result);
@@ -99,50 +135,38 @@ class ClientController {
     }
   }
 
-  verificarSenha() {
-    if (this.checkbox && this.senhaInput) {
-      this.checkbox.addEventListener("change", () => {
-        this.senhaInput.type = this.checkbox.checked ? "text" : "password";
-      });
-    } else {
-      console.error("Elemento com ID 'versenha' ou 'senha' não encontrado.");
-    }
-  }
-
-  formatarCPF() {
-    let cpf = this.cpfInput.value.replace(/\D/g, "");
-
-    if (cpf.length > 11) {
-      cpf = cpf.substring(0, 11);
-    }
-
-    if (cpf) {
-      if (cpf.length > 3) {
-        cpf = cpf.substring(0, 3) + "." + cpf.substring(3);
-      }
-      if (cpf.length > 7) {
-        cpf = cpf.substring(0, 7) + "." + cpf.substring(7);
-      }
-      if (cpf.length > 11) {
-        cpf = cpf.substring(0, 11) + "-" + cpf.substring(11);
-      }
-
-      this.cpfInput.value = cpf;
-    }
-  }
-
-  iniciarFormatacaoCPF() {
-    if (this.cpfInput) {
-      this.cpfInput.addEventListener("input", () => {
-        this.formatarCPF();
-      });
-      this.cpfInput.addEventListener("keypress", (e) => {
-        if (!/\d/.test(e.key)) {
-          e.preventDefault();
+  enviarJustificativa() {
+    const form = document.querySelector("#formJustificativa");
+    if (form) {
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+  
+        const dataJustificativa = document.getElementById("dataHoraJustificativa").value;
+        const descricaoJustificativa = document.getElementById("descricaoJustificativa").value;
+  
+        try {
+          const response = await fetch("/registrarJustificativa", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              dataJustificativa: dataJustificativa,
+              descricaoJustificativa: descricaoJustificativa
+            })
+          });
+  
+          if (!response.ok) throw new Error("Erro ao registrar ponto");
+  
+          alert("Justificativa registrada com sucesso!");
+          console.log("Justificativa registrada com sucesso!");
+        } catch (error) {
+          console.error("Erro ao registrar justificativa:", error);
+          alert("Erro ao registrar justificativa: " + error.message);
         }
       });
     } else {
-      console.error("Elemento com ID 'cpf' não encontrado.");
+      console.error("Formulário de justificativa não encontrado.");
     }
   }
 
@@ -167,33 +191,13 @@ class ClientController {
 
   formatarDataHora(data) {
     const adicionarZero = (i) => (i < 10 ? "0" + i : i);
-
     const ano = data.getFullYear();
     const mes = adicionarZero(data.getMonth() + 1);
     const dia = adicionarZero(data.getDate());
     const horas = adicionarZero(data.getHours());
     const minutos = adicionarZero(data.getMinutes());
     const segundos = adicionarZero(data.getSeconds());
-
     return `${ano}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
-  }
-
-  sairLogin() {
-    if (this.sairBtn && this.popupOverlay) {
-      this.sairBtn.addEventListener("click", () => {
-        setTimeout(() => {
-          this.fadeIn(this.popupOverlay);
-          this.exibirPopupSair(
-            "Deseja realmente sair?",
-            () => (window.location.href = "/logout")
-          );
-        }, this.timeoutTransitions);
-      });
-    } else {
-      console.error(
-        "Elementos necessários para a funcionalidade de sair não foram encontrados."
-      );
-    }
   }
 
   alterarDadosLogin() {
@@ -212,78 +216,94 @@ class ClientController {
   adicionarEventosFormularioAlterarDados() {
     const confirmarAlteracao = document.getElementById("confirmarAlteracao");
     const cancelarAlteracao = document.getElementById("cancelarAlteracao");
-
+    const mostrarSenhaCheckbox = document.getElementById("mostrarsenha");
+  
     if (confirmarAlteracao) {
       confirmarAlteracao.addEventListener("click", () => {
-        const cpf = document.getElementById("cpf").value;
-        const senhaAtual = document.getElementById("senhaAtual").value;
-        const novaSenha = document.getElementById("novaSenha").value;
-        const confirmarSenha = document.getElementById("confirmarSenha").value;
-
-        if (novaSenha === confirmarSenha) {
-          fetch("/alterarDados", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ cpf, senhaAtual, novaSenha }),
-          })
-            .then((response) => {
-              if (response.ok) {
-                return response.json();
-              } else {
-                return response.json().then((body) => {
-                  throw new Error(body.message || "Erro desconhecido");
-                });
-              }
-            })
-            .then((data) => {
-              alert("Dados alterados com sucesso! Faça Login Novamente!");
-              window.location.href = "/logout";
-              window.history.pushState(null, null, "/");
-              window.addEventListener("popstate", function (event) {
-                window.history.pushState(null, null, "/");
-              });
-            })
-            .catch((error) => {
-              console.error("Erro ao fazer a requisição:", error);
-              alert(`Erro ao fazer a requisição: ${error.message}`);
-            });
-        } else {
-          alert("As senhas não coincidem");
-        }
+        this.enviarDadosAlteracao();
       });
     }
-
+  
     if (cancelarAlteracao) {
       cancelarAlteracao.addEventListener("click", () => {
         this.hidePopup();
       });
     }
+  
+    if (mostrarSenhaCheckbox) {
+      mostrarSenhaCheckbox.addEventListener("change", () => {
+        const senhasInputs = document.querySelectorAll("#senhaAtual, #novaSenha, #confirmarSenha");
+        senhasInputs.forEach(input => {
+          input.type = mostrarSenhaCheckbox.checked ? "text" : "password";
+        });
+      });
+    }
   }
-
-  criarFormularioAlterarDados() {
-    if (this.popupContent) {
-      this.popupContent.innerHTML = `
-                <p>Digite seus dados para alterar</p>
-                <label for="cpf">CPF</label>
-                <input type="text" name="cpf" id="cpf">
-                <label for="senhaAtual">Senha atual</label>
-                <input type="password" name="senhaAtual" id="senhaAtual">
-                <label for="novaSenha">Nova senha</label>
-                <input type="password" name="novaSenha" id="novaSenha">
-                <label for="confirmarSenha">Confirme a nova senha</label>
-                <input type="password" name="confirmarSenha" id="confirmarSenha">
-                <button id="confirmarAlteracao" type="submit">Confirmar</button>
-                <button id="cancelarAlteracao">Cancelar</button>
-            `;
+  
+  enviarDadosAlteracao() {
+    const cpf = document.getElementById("cpfAlterar").value;
+    const senhaAtual = document.getElementById("senhaAtual").value;
+    const novaSenha = document.getElementById("novaSenha").value;
+    const confirmarSenha = document.getElementById("confirmarSenha").value;
+  
+    if (novaSenha === confirmarSenha) {
+      fetch("/alterarDados", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ cpf, senhaAtual, novaSenha }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            return response.json().then((body) => {
+              throw new Error(body.message || "Erro desconhecido");
+            });
+          }
+        })
+        .then((data) => {
+          alert("Dados alterados com sucesso! Faça Login Novamente!");
+          window.location.href = "/logout";
+          window.history.pushState(null, null, "/");
+          window.addEventListener("popstate", function (event) {
+            window.history.pushState(null, null, "/");
+          });
+        })
+        .catch((error) => {
+          console.error("Erro ao fazer a requisição:", error);
+          alert(`Erro ao fazer a requisição: ${error.message}`);
+        });
     } else {
-      console.error("Elemento do pop-up não encontrado.");
+      alert("As senhas não coincidem");
     }
   }
 
-  exibirPopUpAlterarDados() {
-    this.criarFormularioAlterarDados();
+  async criarFormularioAlterarDados() {
+    if (this.popupContent) {
+        try {
+            const response = await fetch("/html/alterar-dados.html");
+            if (!response.ok) {
+                throw new Error(`Erro ao carregar o arquivo: ${response.statusText}`);
+            }
+            const content = await response.text();
+            this.popupContent.innerHTML = content;
+
+            this.cpfAlterarInput = document.getElementById("cpfAlterar");
+            this.adicionarEventListenersFormatarCPF();
+
+            console.log("Formulário de alteração de dados carregado e event listeners adicionados");
+        } catch (error) {
+            console.error("Erro ao carregar o conteúdo:", error);
+        }
+    } else {
+        console.error("Elemento do pop-up não encontrado.");
+    }
+  }
+
+  async exibirPopUpAlterarDados() {
+    await this.criarFormularioAlterarDados();
     this.adicionarEventosFormularioAlterarDados();
 
     setTimeout(() => {
@@ -297,11 +317,14 @@ class ClientController {
   exibirPopupSair(message, confirmCallback) {
     if (this.popupOverlay && this.popupContent) {
       this.popupContent.innerHTML = `
-                <p>${message}</p>
-                <button id="confirmarSair">Sim</button>
-                <button id="cancelarSair">Não</button>
+                <div id="container-sair">
+                  <p>${message}</p>
+                  <div>
+                    <button id="confirmarSair" class="confirmarBtn">Sim</button>
+                    <button id="cancelarSair" class="cancelarBtn">Não</button>
+                  </div>
+                </div>
             `;
-
       this.popupOverlay.style.display = "flex";
 
       document.getElementById("confirmarSair").addEventListener("click", () => {
@@ -370,7 +393,6 @@ class ClientController {
     ];
 
     monthYearSpan.textContent = `${monthNames[month]} ${year}`;
-
     calendarBody.innerHTML = "";
 
     let row = document.createElement("tr");
@@ -401,107 +423,48 @@ class ClientController {
 
   trocarConteudoPrincipal(btnId) {
     this.containerRegistro.classList.add("hidden");
-    setTimeout(() => {
-      switch (btnId) {
-        case "marcar-ponto":
-          this.containerRegistro.innerHTML = `
-                    <div id="corpo-formulario-registro">
-                        <form class="form-1">
-                            <h1 id="relogio"></h1>
-                            <h2>Seja bem vindo!</h2>
-                            <img src="/img/Clock.png" alt="">
-                            <button class="btn">
-                                Registrar
-                            </button>
-                        </form>
-                    </div>
-                `;
-          this.atualizarRelogio();
-          this.registrarHorasEntradaSaida();
-          break;
-        case "justificativa":
-          this.containerRegistro.innerHTML = `
-                    <div id="container-justificativa">
-                        <form class="blocos-justificativa" action="/registrar-justificava" method="post">
-                            <h3>Faça aqui sua justificativa em caso de imprevistos</h3>
-                            <input type="date" name="" id="" class="inputs-justificativa">
-                            <input type="time" name="" id="" class="inputs-justificativa">
-                            <textarea name="" id="" class="textarea-justificativa"></textarea>
-                            <div class="alinhamento-btns-jus">
-                                <p><img src="" alt="">Anexar documento</p>
-                                <button type="submit" class="btn">Justificar</button>
-                            </div>
-                        </form>
-                        <form class="blocos-justificativa">
-                            <h3>Veja aqui seu histórico de justificativas</h3>
-                            <table></table>
-                            <div class="alinhamento-btns-jus">
-                                <button class="btn">Anterior</button>
-                                <button class="btn">Próximo</button>
-                            </div>
-                        </form>
-                    </div>
-                `;
-          break;
-        case "historico":
-          this.containerRegistro.innerHTML = `
-                    <div id="container-historicohoras">
-                    <h1 class="horas">Total de horas</h1>
-                    <p id="totalHoras"></p>
-                        <div class="controls">
-                            <button id="prevMonth">◀</button>
-                            <span id="monthYear"></span>
-                            <button id="nextMonth">▶</button>
-                        </div>
-                        <div class="container-centralizar">
-                        <div class="table-container">
-                            <table id="hoursTable">
-                                <thead>
-                                    <tr>
-                                        <th>Domingo</th>
-                                        <th>Segunda</th>
-                                        <th>Terça</th>
-                                        <th>Quarta</th>
-                                        <th>Quinta</th>
-                                        <th>Sexta</th>
-                                        <th>Sábado</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="calendarBody">
-                                </tbody>
-                            </table>
-                            <div id="bloco-legenda">
-                            <p id="titulo-legenda">Legenda:</p>
-                            <div id="tipos-legenda">
-                              <div class="item-legenda">
-                                <span class="retangulo consistente"></span>
-                                <span class="texto-legenda">Horas Consistentes</span>
-                              </div>
-                              <div class="item-legenda">
-                                <span class="retangulo inconsistente"></span>
-                                <span class="texto-legenda">Horas Inconsistentes</span>
-                              </div>
-                              <div class="item-legenda">
-                                <span class="retangulo falta"></span>
-                                <span class="texto-legenda">Faltas</span>
-                              </div>
-                              <div class="item-legenda">
-                                <span class="retangulo justificativa"></span>
-                                <span class="texto-legenda">Justificativa</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-                    </div>
-                `;
-          this.updateCalendar();
-          this.initCalendarNavigation();
-          break;
-        default:
-          console.error("Botão não reconhecido:", btnId);
-      }
-      this.containerRegistro.classList.remove("hidden");
+    setTimeout(async () => {
+        let htmlFile;
+        switch (btnId) {
+            case "marcar-ponto":
+                htmlFile = "/html/marcar-ponto.html";
+                break;
+            case "justificativa":
+                htmlFile = "/html/justificativa.html";
+                break;
+            case "historico":
+                htmlFile = "/html/historico.html";
+                break;
+            default:
+                console.error("Botão não reconhecido:", btnId);
+                return;
+        }
+
+        try {
+            const response = await fetch(htmlFile);
+            if (!response.ok) {
+                throw new Error(`Erro ao carregar o arquivo: ${response.statusText}`);
+            }
+            const content = await response.text();
+            this.containerRegistro.innerHTML = content;
+            switch (btnId) {
+              case "marcar-ponto":
+                  this.atualizarRelogio();
+                  this.registrarHorasEntradaSaida();
+                  break;
+              case "justificativa":
+                  this.enviarJustificativa();
+                  break;
+              case "historico":
+                  this.updateCalendar();
+                  this.initCalendarNavigation();
+                  break;
+            }
+        } catch (error) {
+            console.error("Erro ao carregar o conteúdo:", error);
+        }
+
+        this.containerRegistro.classList.remove("hidden");
     }, this.timeoutTransitions);
   }
 
@@ -523,12 +486,7 @@ class ClientController {
 
 document.addEventListener("DOMContentLoaded", () => {
   const clientController = new ClientController();
-  clientController.iniciarFormatacaoCPF();
-  clientController.verificarSenha();
   clientController.atualizarRelogio();
-  clientController.sairLogin();
-  clientController.alterarDadosLogin();
   clientController.registrarHorasEntradaSaida();
-  clientController.updateCalendar(); // Atualiza o calendário na inicialização
-  clientController.initCalendarNavigation();
+  clientController.enviarJustificativa();
 });

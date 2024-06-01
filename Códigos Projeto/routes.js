@@ -6,6 +6,7 @@ const {
   processarLogin,
   alterarDadosLogin,
   registrarHoras,
+  registrarJustificativa
 } = require("./public/js/loginController");
 
 app.use(bodyParser.json());
@@ -64,5 +65,7 @@ router.post("/alterarDados", (req, res) => {
 });
 
 router.post("/registrar", (req, res) => registrarHoras(req, res));
+
+router.post("/registrarJustificativa", (req, res) => registrarJustificativa(req, res));
 
 module.exports = router;

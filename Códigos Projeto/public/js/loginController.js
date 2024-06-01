@@ -1,6 +1,7 @@
 const Login = require("../../Class/Login");
 const Database = require("../../Class/ConnectionDatabase");
 const DadosFuncionario = require("../../Class/DadosFuncionario");
+const HistoricoJustificativa = require("../../Class/HistoricoJustificativa");
 
 async function realizarLogin(cpf, senha) {
   const login = new Login();
@@ -20,10 +21,9 @@ async function realizarLogin(cpf, senha) {
 async function obterDadosFuncionario(id_funcionario) {
   const database = new Database();
   try {
-    database.connect(); // Conecta ao banco de dados
-    const dadosFuncionario = new DadosFuncionario(id_funcionario, database); // Passa a instância de database como parâmetro
+    database.connect();
+    const dadosFuncionario = new DadosFuncionario(id_funcionario, database);
     const dados = await dadosFuncionario.obterDadosFuncionario();
-    //database.close(); // Fecha a conexão com o banco de dados
     return dados;
   } catch (error) {
     console.error("Erro ao obter dados do funcionário:", error);
@@ -42,13 +42,13 @@ async function processarLogin(req, res) {
       req.session.loggedin = true;
       req.session.userId = resultadoLogin.idFuncionario;
       req.session.dadosFuncionario = resultadoLogin.dadosFuncionario;
-      res.render("TelaPrincipal", resultadoLogin.dadosFuncionario); // Renderiza a página e passa os dados do funcionário como variáveis de template
+      res.render("TelaPrincipal", resultadoLogin.dadosFuncionario);
     } else {
-      res.send("Login falhou!");
+      res.status(401).json({ success: false, message: "Credenciais inválidas" });
     }
   } catch (error) {
     console.error("Erro ao fazer login:", error);
-    res.status(500).send("Erro ao fazer login");
+    res.status(500).json({ success: false, message: "Erro ao fazer login. Por favor, tente novamente mais tarde." });
   }
 }
 
@@ -88,14 +88,33 @@ async function registrarHoras(req, res) {
   try {
     console.log(`ID do funcionário: ${idFuncionario} Data Hora: ${dataHoraEntrada}`);
     database.connect();
-    //função para registrar as horas no banco de dados
-    database.close();
+    //função para registrar as horas no banco de dados (implementar posteriormente)
     res.status(200).json({ message: 'Ponto registrado com sucesso!' });
   } catch (error) {
     console.error("Erro ao registrar horas:", error);
     database.close();
     res.status(500).json({ message: 'Erro ao registrar ponto' });
+  } finally {
+    database.close()
   }
 }
 
-module.exports = { processarLogin, alterarDadosLogin, registrarHoras };
+async function registrarJustificativa(req, res) {
+  const { dataHoraJustificativa, descricaoJustificativa, documentoApoio } = req.body;
+  const idFuncionario = req.session.userId;
+
+  const database = new Database();
+  try {
+    database.connect();
+    const historicoJustificativa = new HistoricoJustificativa(idFuncionario, database);
+    await historicoJustificativa.registroDadosJustificativa(dataHoraJustificativa, descricaoJustificativa, documentoApoio);
+    res.status(200).json({ message: 'Justificativa registrada com sucesso!' });
+  } catch (error) {
+    console.error("Erro ao registrar justificativa:", error);
+    res.status(500).json({ message: 'Erro ao registrar justificativa' });
+  } finally {
+    database.close();
+  }
+}
+
+module.exports = { processarLogin, alterarDadosLogin, registrarHoras, registrarJustificativa };

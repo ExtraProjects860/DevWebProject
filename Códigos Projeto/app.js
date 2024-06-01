@@ -32,5 +32,5 @@ app.set("view engine", "ejs");
 app.use("/", routes);
 
 app.listen(PORT, () => {
-  console.log(`Servidor Node.js rodando na porta ${PORT}`);
+  console.log(`Servidor Node.js rodando na porta http://localhost:${PORT}`);
 });
