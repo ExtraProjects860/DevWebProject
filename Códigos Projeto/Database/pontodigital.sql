@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02/06/2024 às 00:21
+-- Tempo de geração: 03/06/2024 às 05:36
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -78,18 +78,11 @@ INSERT INTO `historicohoras` (`id_histórico`, `id_funcionario`, `horarioEsperad
 CREATE TABLE `historicojustificativas` (
   `id_justificativa` int(11) NOT NULL,
   `id_funcionario` int(11) NOT NULL,
-  `dataJustificativa` date DEFAULT NULL,
+  `dataHoraJustificativa` datetime DEFAULT NULL,
   `descricaoJustificativa` varchar(255) DEFAULT NULL,
   `documentoApoio` varchar(255) DEFAULT NULL,
   `statusJustificativa` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `historicojustificativas`
---
-
-INSERT INTO `historicojustificativas` (`id_justificativa`, `id_funcionario`, `dataJustificativa`, `descricaoJustificativa`, `documentoApoio`, `statusJustificativa`) VALUES
-(1, 1, NULL, 'teste', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -164,7 +157,7 @@ ALTER TABLE `historicohoras`
 -- AUTO_INCREMENT de tabela `historicojustificativas`
 --
 ALTER TABLE `historicojustificativas`
-  MODIFY `id_justificativa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_justificativa` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `login`

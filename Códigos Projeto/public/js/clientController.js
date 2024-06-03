@@ -141,7 +141,7 @@ class ClientController {
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
   
-        const dataJustificativa = document.getElementById("dataHoraJustificativa").value;
+        const dataHoraJustificativa = document.getElementById("dataHoraJustificativa").value;
         const descricaoJustificativa = document.getElementById("descricaoJustificativa").value;
   
         try {
@@ -151,7 +151,7 @@ class ClientController {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              dataJustificativa: dataJustificativa,
+              dataHoraJustificativa: dataHoraJustificativa,
               descricaoJustificativa: descricaoJustificativa
             })
           });

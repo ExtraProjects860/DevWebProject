@@ -8,7 +8,7 @@ class HistoricoJustificativa {
     async registroDadosJustificativa(dataHoraJustificativa, descricaoJustificativa, documentoApoio) {
         try {
             const sql = `INSERT INTO HistoricoJustificativas 
-                        (id_funcionario, dataJustificativa, descricaoJustificativa, documentoApoio)
+                        (id_funcionario, dataHoraJustificativa, descricaoJustificativa, documentoApoio)
                         VALUES (?, ?, ?, ?);
             `;
 
